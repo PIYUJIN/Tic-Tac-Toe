@@ -66,7 +66,6 @@ fun printBoard() {
                 print("|")
             }
         }
-//        println()
         if(i==size-1) {
             print("")
         }
@@ -76,11 +75,17 @@ fun printBoard() {
     }
 }
 
+// 게임 진행
 class Play {
+
+    // play 시작시 board 초기화
     init {
         initialBorad()
     }
     var player_num = 1
+
+    //해당 칸이 입력 가능한지 확인
+    // 입력 가능 : true, 입력 불가능 : false
     fun isEmpty(row: Int, col: Int): Boolean {
         println(board[row][col])
         if (board[row][col] == ' ') {
@@ -92,19 +97,36 @@ class Play {
         }
     }
 
+    //입력된 board 칸을 해당 player의 표시로 변경
+    fun setBoard(player:Int, row:Int, col:Int) {
+        if(player==1) {
+            board[row][col] = 'O'
+        }
+        else {
+            board[row][col] = 'X'
+        }
+    }
+
+    //숫자 입력받아 게임 진행
     fun inputNumber() {
         var scan = Scanner(System.`in`)
         while (true) {
-            print("Player${player_num} 입력 (줄,칸) : ")
+            var player = player_num%2
+            print("Player${player} 입력 (줄,칸) : ")
             var inputNum = scan.next()
+            // 입력된 number를 row,column로 ("," 기준) split
             var num_split: List<String> = inputNum.split(",")
             var first_num = num_split[0].toInt()
             var second_num = num_split[1].toInt()
             println(num_split[0])
             println(num_split[1])
             player_num++
+            // 해당 칸에 입력 가능한지 확인 후 boolean type 값 반환
             var empty_sapce = isEmpty(first_num, second_num)
 //            println(empty_sapce)
+            if(empty_sapce) {
+                setBoard(player, first_num, second_num)
+            }
             printBoard()
         }
     }
