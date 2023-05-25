@@ -1,3 +1,5 @@
+import java.util.Scanner
+
 // player 1과 player 2가 번갈아가면서 게임 진행
 // 한 칸 선택 (X,Y 좌표 이용)
 // 가로, 세로, 대각선으로 같은 player가 놓는 경우 승리!
@@ -12,9 +14,11 @@
 
 
 fun main() {
-    initialBorad()
-    println()
+    var play = Play()
+//    initialBorad()
+//    println()
     printBoard()
+    play.inputNumber()
 }
 
 val size = 3
@@ -22,17 +26,20 @@ val size = 3
 var board = Array(size) { CharArray(size) }
 
 fun initialBorad() {
+    // board 값 초기화
     for (i in 0..2) {
         for (j in 0..2) {
-            board[i][j] = 'O'
+            board[i][j] = ' '
         }
     }
-    for (i in 0..2) {
-        println()
-        for (j in 0..2) {
-            print(board[i][j])
-        }
-    }
+
+//    // board 값 프린트
+//    for (i in 0..2) {
+//        println()
+//        for (j in 0..2) {
+//            print(board[i][j])
+//        }
+//    }
 
 }
 
@@ -65,6 +72,40 @@ fun printBoard() {
         }
         else {
             print("  -+-+-")
+        }
+    }
+}
+
+class Play {
+    init {
+        initialBorad()
+    }
+    var player_num = 1
+    fun isEmpty(row: Int, col: Int): Boolean {
+        println(board[row][col])
+        if (board[row][col] == ' ') {
+            return true
+        } else {
+            println("해당 칸은 선택이 불가합니다.")
+            player_num--
+            return false
+        }
+    }
+
+    fun inputNumber() {
+        var scan = Scanner(System.`in`)
+        while (true) {
+            print("Player${player_num} 입력 (줄,칸) : ")
+            var inputNum = scan.next()
+            var num_split: List<String> = inputNum.split(",")
+            var first_num = num_split[0].toInt()
+            var second_num = num_split[1].toInt()
+            println(num_split[0])
+            println(num_split[1])
+            player_num++
+            var empty_sapce = isEmpty(first_num, second_num)
+//            println(empty_sapce)
+            printBoard()
         }
     }
 }
