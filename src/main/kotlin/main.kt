@@ -115,6 +115,10 @@ class Play {
         return false
     }
 
+    fun isFull() {
+
+    }
+
     //입력된 board 칸을 해당 player의 표시로 변경
     fun setBoard(player:Int, row:Int, col:Int) {
         if(player==1) {
@@ -145,7 +149,7 @@ class Play {
 //            println(num_split[1])
                 println()
             } catch(e: Exception) {
-                println(e.printStackTrace())
+//                println(e.printStackTrace())
                 println("잘못입력하였습니다. 다시 입력해주세요.")
                 continue
             }
@@ -178,7 +182,11 @@ class Play {
                 break
             }
             else {
-                continue
+                // 보드칸이 다 찬 경우 무승부 처리
+                if(player_num==10) {
+                    println("무승부입니다.")
+                    break
+                }
             }
         }
     }
