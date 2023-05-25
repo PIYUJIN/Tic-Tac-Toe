@@ -145,8 +145,6 @@ class Play {
                 var num_split: List<String> = inputNum.split(",")
                 first_num = num_split[0].toInt()
                 second_num = num_split[1].toInt()
-//            println(num_split[0])
-//            println(num_split[1])
                 println()
             } catch(e: Exception) {
 //                println(e.printStackTrace())
